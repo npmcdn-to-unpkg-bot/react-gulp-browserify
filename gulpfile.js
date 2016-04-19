@@ -37,7 +37,7 @@ gulp.task('server',['browserify'],function(){
 var b = watchify(browserify(assign({}, watchify.args, {
     cache: {}, // required for watchify
     packageCache: {}, // required for watchify
-    entries: ['app/src/js/index.js']
+    entries: ['app/src/main.js']
 })));
 
 // add transformations here
