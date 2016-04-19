@@ -1,7 +1,8 @@
 
-var hello=React.createClass({
+var names=['11','22','33','44'];
+var Hello=React.createClass({
     render:function(){
-        return <h1>hello world!</h1>;
+        return <h1>hello {this.props.name}</h1>;
     }
 })
-React.render(<hello/>, 'hello');
+ReactDOM.render(<Hello name="world"/>, document.getElementById('app'));

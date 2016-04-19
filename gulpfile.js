@@ -10,7 +10,7 @@ var uglify = require('gulp-uglify');
 var assign = require('lodash.assign');
 var react=require('gulp-react');
 var browserSync=require('browser-sync');
-gulp.task('default', ['server'], function () {
+gulp.task('default', ['server','watch'], function () {
 
 });
 
@@ -32,6 +32,9 @@ gulp.task('server',['browserify'],function(){
     browserSync.init({
         server:'./app'
     });
+})
+gulp.task('watch',function(){
+    gulp.watch('app/src/jsx/*.jsx',['browserify']);
 })
 // add custom browserify options here
 var b = watchify(browserify(assign({}, watchify.args, {

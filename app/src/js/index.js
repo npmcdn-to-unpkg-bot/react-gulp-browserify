@@ -1,8 +1,9 @@
-"use strict";
+'use strict';
 
-var hello = React.createClass({ displayName: "hello",
+var names = ['11', '22', '33', '44'];
+var Hello = React.createClass({ displayName: "Hello",
     render: function render() {
-        return React.createElement("h1", null, "hello world!");
+        return React.createElement("h1", null, "hello ", this.props.name);
     }
 });
-React.render(React.createElement("hello", null), 'hello');
+ReactDOM.render(React.createElement(Hello, { name: "world" }), document.getElementById('app'));
