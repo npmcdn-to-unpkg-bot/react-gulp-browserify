@@ -1,11 +1,17 @@
 var TodoList=React.createClass({
 	render:function(){
+		var _html='';
 		var createItem=function(itemText){
-			return <li>itemText</li>
+			html+= <li>{itemText}</li>;
 		}
 		var list=[1,2,3,4,5,6];
-		list.forEach(createItem);
+		var i=0,len=list.length;
+		for(;i<len;i++){
+			var item=list[i];
+			createItem(item)
+		}
+		return _html;
 	}
 });
 
-React.render(<TodoList></TodoList>,TodoList);
+ReactDOM.render(<TodoList></TodoList>,document.getElementById('todolist'));

@@ -2,12 +2,19 @@
 
 var TodoList = React.createClass({ displayName: "TodoList",
 	render: function render() {
+		var _html = '';
 		var createItem = function createItem(itemText) {
-			return React.createElement("li", null, "itemText");
+			html += React.createElement("li", null, itemText);
 		};
 		var list = [1, 2, 3, 4, 5, 6];
-		list.forEach(createItem);
+		var i = 0,
+		    len = list.length;
+		for (; i < len; i++) {
+			var item = list[i];
+			createItem(item);
+		}
+		return _html;
 	}
 });
 
-React.render(React.createElement(TodoList, null), TodoList);
+ReactDOM.render(React.createElement(TodoList, null), document.getElementById('todolist'));

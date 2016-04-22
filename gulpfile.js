@@ -8,35 +8,48 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var assign = require('lodash.assign');
-var react=require('gulp-react');
-var browserSync=require('browser-sync');
-gulp.task('default', ['server','watch'], function () {
+var react = require('gulp-react');
+var browserSync = require('browser-sync');
+// var sourcemaps=require('gulp-sourcemaps');
+var plumber = require('gulp-plumber');
+gulp.task('default', ['server', 'watch'], function() {
 
 });
 
-gulp.task('bebel',['react'], function () {
+gulp.task('bebel', ['react'], function() {
     return gulp.src('app/src/js/*.js')
+        .pipe(plumber({}, true, function(err) {
+            console.log('ERROR!!!!');
+            console.log(err);
+        }))
         .pipe(babel({
             presets: ['es2015']
         }))
-        .pipe(gulp.dest('app/src/js'))
+
+    .pipe(gulp.dest('app/src/js'))
 })
 
-gulp.task('react', function () {
+gulp.task('react', function() {
     return gulp.src('app/src/jsx/*.jsx')
+        .pipe(plumber({}, true, function(err) {
+            console.log('ERROR!!!!');
+            console.log(err);
+        }))
         .pipe(react())
-        .pipe(gulp.dest('app/src/js'))
+
+    .pipe(gulp.dest('app/src/js'))
 })
 
-gulp.task('server',['browserify'],function(){
+gulp.task('server', ['browserify'], function() {
     browserSync.init({
-        server:'./app'
+        server: './app'
     });
 })
-gulp.task('watch',function(){
-    gulp.watch('app/src/jsx/*.jsx',['browserify']);
-})
-// add custom browserify options here
+gulp.task('watch', function() {
+        gulp.watch(['app/src/jsx/*.jsx', 'app/src/main.js'], ['browserify']);
+        gulp.watch(['app/build/bundle.js'], browserSync.reload())
+    })
+    // add custom browserify options here
 var b = watchify(browserify(assign({}, watchify.args, {
     cache: {}, // required for watchify
     packageCache: {}, // required for watchify
