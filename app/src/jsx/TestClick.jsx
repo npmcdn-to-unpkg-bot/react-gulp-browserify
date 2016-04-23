@@ -10,11 +10,16 @@ var TestClickComponent = React.createClass({
     },
     handleClick(e){
     	alert('clicked')
-    	var tipElement=ReactDOM.findDOMNode(this.refs.tip);
-    	if(this.style.display==='node'){	
+    	// var tipElement=ReactDOM.findDOMNode(this.refs.tip);
+        //
+        var  tipElement=this.refs.tip.getDOMNode();
+        console.log(tipElement)
+    	if(this.style.display==='none'){
+        alert(1)	
     		tipElement.style.display='inline'
     	}else{
-    		tipElement.style.display='block'
+            alert(2)
+    		tipElement.style.display='none'
     	}
     }
 });
@@ -25,7 +30,7 @@ var TestInputComponent = React.createClass({
     displayName: 'TestInputComponent',
     render() {
         return (
-            <div><input type="text" value={this.state.inputContent} onChange={this.handleChange}/></div>
+            <div><input type="text" value={this.state.inputContent} onInput={this.changeHandler}/><br/><br/><br/><span ref="showBox">{this.state.inputContent}</span></div>
         );
     },
     getInitialState() {
@@ -33,7 +38,7 @@ var TestInputComponent = React.createClass({
             inputContent:''  
         };
     },
-    handleChange(e){
+    changeHandler(e){
     	alert('changed')
     }
 });

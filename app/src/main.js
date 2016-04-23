@@ -4,3 +4,5 @@ require('./js/world.js')
 var List=require('./js/list.js');
 
 require('./js/TestClick')
+
+// require('./js/Panel')
