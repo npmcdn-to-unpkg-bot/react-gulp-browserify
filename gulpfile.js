@@ -12,7 +12,7 @@ var react = require('gulp-react');
 var browserSync = require('browser-sync');
 // var sourcemaps=require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
-gulp.task('default', ['server', 'watch'], function() {
+gulp.task('default', ['server', 'browserify','watch'], function() {
 
 });
 
@@ -40,7 +40,7 @@ gulp.task('react', function() {
     .pipe(gulp.dest('app/src/js'))
 })
 
-gulp.task('server', ['browserify'], function() {
+gulp.task('server', function() {
     browserSync.init({
         server: './app'
     });
