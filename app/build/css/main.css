@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.wiget-select-container {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  position: relative;
+  line-height: 30px;
+  text-align: center; }
+
+.wiget-select-container > ul {
+  width: 200px;
+  height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  border: 1px solid #ccc; }
+
+.wiget-select-container > ul .wiget-select-option {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #ccc;
+  list-style: none; }

@@ -12,8 +12,7 @@ var react = require('gulp-react');
 var browserSync = require('browser-sync');
 // var sourcemaps=require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
-var sass=require('gulp-sass');
-gulp.task('default', ['server', 'browserify','sass','watch'], function() {
+gulp.task('default', ['server', 'watch'], function() {
 
 });
 
@@ -40,20 +39,15 @@ gulp.task('react', function() {
 
     .pipe(gulp.dest('app/src/js'))
 })
-gulp.task('sass',function(){
-    gulp.src('app/src/sass/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('app/build/css/'))
-})
-gulp.task('server', function() {
+
+gulp.task('server', ['browserify'], function() {
     browserSync.init({
         server: './app'
     });
 })
 gulp.task('watch', function() {
         gulp.watch(['app/src/jsx/*.jsx', 'app/src/main.js'], ['browserify']);
-        gulp.watch(['app/build/bundle.js'], browserSync.reload());
-        gulp.watch(['app/src/sass/*.scss'],['sass']);
+        gulp.watch(['app/build/bundle.js'], browserSync.reload())
     })
     // add custom browserify options here
 var b = watchify(browserify(assign({}, watchify.args, {
