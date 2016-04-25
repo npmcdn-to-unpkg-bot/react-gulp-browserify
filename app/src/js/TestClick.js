@@ -11,7 +11,7 @@ var TestClickComponent = React.createClass({
         alert('clicked');
         // var tipElement=ReactDOM.findDOMNode(this.refs.tip);
         //
-        var tipElement = this.refs.tip.getDOMNOdes();
+        var tipElement = this.refs.tip.getDOMNode();
         console.log(tipElement);
         if (this.style.display === 'none') {
             alert(1);
