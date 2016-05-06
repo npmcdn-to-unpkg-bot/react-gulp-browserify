@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "gulp-sourcemap": "^1.0.1",
     "react": "^15.0.1"
   },
   "devDependencies": {
@@ -15,6 +16,7 @@
     "gulp-jsx": "^2.0.1",
     "gulp-plumber": "^1.1.0",
     "gulp-react": "^3.1.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "lodash.assign": "^4.0.8",

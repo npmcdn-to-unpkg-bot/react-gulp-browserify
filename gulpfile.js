@@ -10,13 +10,13 @@ var uglify = require('gulp-uglify');
 var assign = require('lodash.assign');
 var react = require('gulp-react');
 var browserSync = require('browser-sync');
-// var sourcemaps=require('gulp-sourcemaps');
+var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var sass=require('gulp-sass');
-gulp.task('default', ['server', 'browserify','sass','watch'], function() {
+gulp.task('default', ['server','sass','watch'], function() {
 
 });
-
+//babel
 gulp.task('bebel', ['react'], function() {
     return gulp.src('app/src/js/*.js')
         .pipe(plumber({}, true, function(err) {
@@ -29,7 +29,7 @@ gulp.task('bebel', ['react'], function() {
 
     .pipe(gulp.dest('app/src/js'))
 })
-
+//react
 gulp.task('react', function() {
     return gulp.src('app/src/jsx/*.jsx')
         .pipe(plumber({}, true, function(err) {
@@ -40,16 +40,22 @@ gulp.task('react', function() {
 
     .pipe(gulp.dest('app/src/js'))
 })
+//sass
 gulp.task('sass',function(){
     gulp.src('app/src/sass/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('app/build/css/'))
 })
+//server
 gulp.task('server', function() {
-    browserSync.init({
-        server: './app'
+    browserSync({
+        server: './app',
+        files:'buid/css/*.css'
     });
 })
+//watch
 gulp.task('watch', function() {
         gulp.watch(['app/src/jsx/*.jsx', 'app/src/main.js'], ['browserify']);
         gulp.watch(['app/build/bundle.js'], browserSync.reload());
@@ -64,7 +70,7 @@ var b = watchify(browserify(assign({}, watchify.args, {
 
 // add transformations here
 // i.e. b.transform(coffeeify);
-
+//browserify
 gulp.task('browserify', ['bebel'], bundle);
 b.on('update', bundle); // on any dep update, runs the bundler  
 b.on('log', gutil.log); // output build logs to terminal
