@@ -8476,8 +8476,8 @@ var data = Mock.mock({
 for (var i = 0; i < data.list.length; i++) {
 	var item = data.list[i];
 	item.pos = {
-		top: _random(0, wHeight - 400) + 'px',
-		left: _random(0, wWidth - 240) + 'px',
+		top: _random(80, wHeight - 420) + 'px',
+		left: _random(80, wWidth - 420) + 'px',
 		transform: 'rotateZ(' + (Math.random() > 0.5 ? 1 : -1) * _random(0, 90) + 'deg)'
 	};
 }
