@@ -2,4 +2,60 @@
   margin: 0;
   padding: 0; }
 
+html, body {
+  width: 100%;
+  height: 100%; }
+
+.gallery {
+  width: 100%;
+  height: 100%;
+  position: relative; }
+
+.gallery li {
+  width: 240px;
+  height: 400px;
+  overflow: hidden;
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #ccc; }
+
+.gallery li .caption {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .5s ease;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 0 15px #ccc;
+  text-align: center; }
+
+.gallery li .caption h2 {
+  width: 100%;
+  height: 100%;
+  line-height: 400px; }
+
+.gallery li img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all .5s ease;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 0 15px #ccc; }
+
+.gallery .front .caption {
+  transform: rotateY(180deg); }
+
+.gallery .front img {
+  transform: rotateY(0); }
+
+.gallery .back .caption {
+  transform: rotateY(0); }
+
+.gallery .back img {
+  transform: rotateY(180deg); }
+
 /*# sourceMappingURL=maps/gallery.css.map */
