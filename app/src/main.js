@@ -7,4 +7,6 @@
 
 // require('./js/Panel')
 
-require('./js/Demo')
+// require('./js/Demo')
+
+require('./js/Gallery.js')

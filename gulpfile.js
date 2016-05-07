@@ -12,60 +12,70 @@ var react = require('gulp-react');
 var browserSync = require('browser-sync');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
-var sass=require('gulp-sass');
-gulp.task('default', ['server','sass','watch'], function() {
+var sass = require('gulp-sass');
+var rev = require('gulp-rev-append');
+gulp.task('default', ['server', 'sass', 'watch'], function() {
 
 });
 //babel
 gulp.task('bebel', ['react'], function() {
-    return gulp.src('app/src/js/*.js')
-        .pipe(plumber({}, true, function(err) {
-            console.log('ERROR!!!!');
-            console.log(err);
-        }))
-        .pipe(babel({
-            presets: ['es2015']
-        }))
+        return gulp.src('app/src/js/*.js')
+            .pipe(plumber({}, true, function(err) {
+                console.log('ERROR!!!!');
+                console.log(err);
+            }))
+            .pipe(babel({
+                presets: ['es2015']
+            }))
 
-    .pipe(gulp.dest('app/src/js'))
-})
-//react
+        .pipe(gulp.dest('app/src/js'))
+    })
+    //react
 gulp.task('react', function() {
-    return gulp.src('app/src/jsx/*.jsx')
-        .pipe(plumber({}, true, function(err) {
-            console.log('ERROR!!!!');
-            console.log(err);
-        }))
-        .pipe(react())
+        return gulp.src('app/src/jsx/*.jsx')
+            .pipe(plumber({}, true, function(err) {
+                console.log('ERROR!!!!');
+                console.log(err);
+            }))
+            .pipe(react())
 
-    .pipe(gulp.dest('app/src/js'))
-})
-//sass
-gulp.task('sass',function(){
-    gulp.src('app/src/sass/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('app/build/css/'))
-})
-//server
+        .pipe(gulp.dest('app/src/js'))
+    })
+    //sass
+gulp.task('sass', function() {
+        gulp.src('app/src/sass/*.scss')
+            .pipe(sourcemaps.init())
+            .pipe(sass())
+            .pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest('app/build/css/'))
+    })
+
+ 
+gulp.task('rev', function () {
+    gulp.src('app/index.html')
+        .pipe(rev())
+        .pipe(gulp.dest('app/index.html'));
+});
+    //server
 gulp.task('server', function() {
-    browserSync({
-        server: './app',
-        files:'buid/css/*.css'
-    });
-})
-//watch
+        browserSync({
+            server: './app',
+            files: 'buid/css/*.css'
+        });
+    })
+    //watch
 gulp.task('watch', function() {
         gulp.watch(['app/src/jsx/*.jsx', 'app/src/main.js'], ['browserify']);
         gulp.watch(['app/build/bundle.js'], browserSync.reload());
-        gulp.watch(['app/src/sass/*.scss'],['sass']);
+        gulp.watch(['app/src/sass/*.scss'], ['sass']);
+        gulp.watch(['app/index.html'], ['rev']);
     })
     // add custom browserify options here
 var b = watchify(browserify(assign({}, watchify.args, {
     cache: {}, // required for watchify
     packageCache: {}, // required for watchify
-    entries: ['app/src/main.js']
+    entries: ['app/src/main.js'],
+    debug:true
 })));
 
 // add transformations here
@@ -82,6 +92,8 @@ function bundle() {
         .pipe(source('bundle.js'))
         // optional, remove if you don't need to buffer file contents
         .pipe(buffer())
-        .pipe(uglify())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        // .pipe(uglify())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('app/build'));
 }

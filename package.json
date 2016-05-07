@@ -16,10 +16,12 @@
     "gulp-jsx": "^2.0.1",
     "gulp-plumber": "^1.1.0",
     "gulp-react": "^3.1.0",
+    "gulp-rev-append": "^0.1.6",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "lodash.assign": "^4.0.8",
+    "mockjs": "^1.0.1-beta2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
