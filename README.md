@@ -1,8 +1,6 @@
 # react-gulp-browserify
-## 用gulp+browserify构建的一个react小项目
+用gulp+browserify构建的一个react小项目
+##install
 
-
-#Install
-
-###npm install 
-###gulp
+>npm install
+>gulp default
